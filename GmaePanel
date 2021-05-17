@@ -56,4 +56,70 @@ public class GamePanel extends JPanel {
 		// 因为窗体的菜单栏,边框也要占用像素,所以加上20和40修正大小
 		int[] a = {this.cols * BLOCKWIDTH + 20, this.rows * BLOCKHEIGHT + 40};
 		return a;}
-    
+    // 初始化按钮,将JLabel覆盖住
+	private void initButtons() {
+		// 循环生成按钮
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				MyButton btn = new MyButton();
+				// 根据JLabel大小设置按钮的大小边界
+				btn.setBounds(j * BLOCKWIDTH, i * BLOCKHEIGHT, BLOCKWIDTH, BLOCKHEIGHT);
+				this.add(btn);
+				// 将按钮存在类变量中(当然,实际上存的是对象的引用地址)
+				buttons[i][j] = btn;
+				btn.row = i;
+				btn.col = j;
+				// 给按钮添加监听器,注册点击事件
+				// (单机按钮时,将执行内部类ActionListener()中的actionPerformed(ActionEvent e)方法)
+				btn.addActionListener(new ActionListener() {
+ 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+				
+					}});
+			}
+		}
+	}
+	private final int[][] offset = {{-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}};
+
+// 判断位置是否越界
+	private boolean verify(int row, int col) {
+		return row >= 0 && row < this.rows && col >= 0 && col < this.cols;
+	}
+	// 单击按钮时打开或成片打开
+	private void open(MyButton btn) {
+		// 先将当期按钮设置为不可见,即打开了按钮
+		btn.setVisible(false);
+		// 判断按钮中 是否为数字还是空
+		switch (labels[btn.row][btn.col].getText()) {
+		// 如果是炸弹则将全部按钮都打开,游戏结束
+		case "*" :
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					buttons[i][j].setVisible(false);
+				}
+			}
+			break;
+		// 如果是空的则将他周围空的按钮都打开,进入递归
+		case "" :
+			for (int[] off: offset) {
+				int newRow = btn.row + off[0];
+				int newCol = btn.col + off[1];
+				if (verify(newRow, newCol)) {
+					MyButton sButton = buttons[newRow][newCol];
+					if (sButton.isVisible()) {
+						open(sButton);
+					}
+				}
+			}
+		default:
+		}
+	}
+	btn.addActionListener(new ActionListener() {
+ 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						open((MyButton) e.getSource());
+					}});
