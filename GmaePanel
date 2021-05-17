@@ -1,0 +1,59 @@
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+ 
+public class GamePanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	// 界面行数
+	private int rows;
+	// 界面列数
+	private int cols;
+	// 炸弹数
+	private int bombCount;
+	// 每个方格宽度
+	private final int BLOCKWIDTH = 20;
+	// 每个方格长度
+	private final int BLOCKHEIGHT = 20;
+	// 存储界面中每一个方格的绘制信息
+	private JLabel[][] labels;
+}
+
+// 构造方法,初始化参数
+	public GamePanel(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
+		this.bombCount = rows * cols / 10;
+		this.labels = new JLabel[rows][cols];
+		this.setLayout(null);
+    this.initLabels();// 写在构造方法中
+	}
+  
+// 界面初始化,绘制扫雷的边框
+	private void initLabels(){
+		for (int i = 0; i < this.rows; i++) {
+			for (int j = 0; j < this.cols; j++) {
+				JLabel l = new JLabel("", JLabel.CENTER);
+				// 设置每个小方格的边界
+				l.setBounds(j * BLOCKWIDTH, i * BLOCKHEIGHT, BLOCKWIDTH, BLOCKHEIGHT);
+				// 绘制方格边框
+				l.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				// 设置方格为透明,便于我们填充颜色
+				l.setOpaque(true);
+				// 背景填充为黄色
+				l.setBackground(Color.YELLOW);
+				// 将方格加入到容器中(即面板JPanel)
+				this.add(l);
+				// 将方格存到类变量中,方便公用
+				labels[i][j] = l;
+			}
+		}
+// 计算宽和高,并传给容器
+	public int[] returnSize() {
+		// 因为窗体的菜单栏,边框也要占用像素,所以加上20和40修正大小
+		int[] a = {this.cols * BLOCKWIDTH + 20, this.rows * BLOCKHEIGHT + 40};
+		return a;}
+    
