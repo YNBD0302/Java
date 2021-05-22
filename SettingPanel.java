@@ -3,9 +3,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class SettingPanel extends JPanel {
-    public static void main(String[] args) {
-        JFrame settingFrame = new JFrame("设置");
+public class SettingPanel extends JFrame {
+    private static final JFrame settingFrame = new JFrame("设置");
+    public SettingPanel() {
         settingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel panel1 = new JPanel(new GridBagLayout());
         panel1.add(new JLabel("主题"));

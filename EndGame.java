@@ -3,10 +3,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class EndGame {
-    public static void main(String[] args) {
+public class EndGame extends JFrame{
+    public EndGame() {
         JFrame endFrame = new JFrame();
-        JPanel panel = new JPanel(new GridLayout(1,2,7,10));
+        JPanel panel = new JPanel(new GridLayout(10,1,7,10));
         panel.add(new JLabel("评语",JLabel.CENTER));
         panel.add(new JLabel("您找出的雷数："));
         panel.add(new JTextField(1));
@@ -21,9 +21,7 @@ public class EndGame {
         renew.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                // 获取事件源（即开关按钮本身）
-                JToggleButton toggleBtn = (JToggleButton) e.getSource();
-                System.out.println(toggleBtn.getText() + " 是否选中: " + toggleBtn.isSelected());
+
             }
         });
         panel.add(renew);
@@ -31,8 +29,7 @@ public class EndGame {
             @Override
             public void stateChanged(ChangeEvent e) {
                 // 获取事件源（即开关按钮本身）
-                JToggleButton toggleBtn = (JToggleButton) e.getSource();
-                System.out.println(toggleBtn.getText() + " 是否选中: " + toggleBtn.isSelected());
+
             }
         });
         panel.add(back);
