@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class ChooseCharacter extends JFrame {
-    private static int num;
     private static final JFrame characterFrame = new JFrame("扫雷");
     private static final JPanel singlePlayer = new JPanel();
     private static final JLabel chooseHero = new JLabel("请选择你的角色");
@@ -25,8 +24,21 @@ public class ChooseCharacter extends JFrame {
     }
 
     public static void initHero1() {
-        setConfirm();
-        getHero();
+        confirm.setOpaque(false);
+        confirm.setBorder(null);
+        confirm.setForeground(Color.BLACK);
+        confirm.setFont(new Font("微软雅黑", Font.BOLD, 26));
+        //TODO 连接选择角色的图片
+        heroBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // 只处理选中的状态
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    System.out.println("选中: " + heroBox.getSelectedIndex() + " = " + heroBox.getSelectedItem());
+                }
+            }
+        });
+
         singlePlayer.add(chooseHero);
         singlePlayer.add(heroBox);
         singlePlayer.add(confirm);
@@ -38,13 +50,30 @@ public class ChooseCharacter extends JFrame {
                 characterFrame.dispose();
             }
         });
+        characterFrame.pack();
+        characterFrame.setLocationRelativeTo(null);
+        characterFrame.setSize(500, 600);
+        characterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         characterFrame.setContentPane(singlePlayer);
-        setCharacterFrame();
+
     }
 
     public static void initHero2() {
-        getHero();
-        setConfirm();
+        //TODO 连接选择角色的图片
+        heroBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // 只处理选中的状态
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    System.out.println("选中: " + heroBox.getSelectedIndex() + " = " + heroBox.getSelectedItem());
+                }
+            }
+        });
+
+        confirm.setOpaque(false);
+        confirm.setBorder(null);
+        confirm.setForeground(Color.BLACK);
+        confirm.setFont(new Font("微软雅黑", Font.BOLD, 26));
         doublePlayer.setOneTouchExpandable(true);
         doublePlayer.setContinuousLayout(true);
         doublePlayer.setDividerLocation(250);
@@ -58,34 +87,11 @@ public class ChooseCharacter extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //TODO 连接GamePanel的方法
                 characterFrame.dispose();
+                new Main(10);
              // GamePanel gamePanel = new GamePanel();
             }
         });
         characterFrame.setContentPane(doublePlayer);
-        setCharacterFrame();
-    }
-
-    public static void getHero() {
-//TODO 连接选择角色的图片
-        heroBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                // 只处理选中的状态
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    System.out.println("选中: " + heroBox.getSelectedIndex() + " = " + heroBox.getSelectedItem());
-                }
-            }
-        });
-    }
-
-    public static void setConfirm() {
-        confirm.setOpaque(false);
-        confirm.setBorder(null);
-        confirm.setForeground(Color.BLACK);
-        confirm.setFont(new Font("微软雅黑", Font.BOLD, 26));
-    }
-
-    public static void setCharacterFrame() {
         characterFrame.pack();
         characterFrame.setLocationRelativeTo(null);
         characterFrame.setSize(500, 600);
@@ -93,11 +99,16 @@ public class ChooseCharacter extends JFrame {
         characterFrame.setVisible(true);
     }
 
-    public static int getNum() {
-        return num;
+    public static void getHero() {
     }
 
-    public static void setNum(int num) {
-        ChooseCharacter.num = num;
+    public static void setConfirm() {
+
     }
+
+    public static void setCharacterFrame() {
+
+    }
+
+
 }

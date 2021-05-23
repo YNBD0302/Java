@@ -5,10 +5,29 @@ import java.awt.*;
 
 public class SettingPanel extends JFrame {
     private static final JFrame settingFrame = new JFrame("设置");
+    private static Icon button1=new Icon() {
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+
+        }
+
+        @Override
+        public int getIconWidth() {
+            return 0;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return 0;
+        }
+    }
     public SettingPanel() {
         settingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        JPanel panel1 = new JPanel(new GridBagLayout());
+
+
+        JPanel panel1 = new JPanel(new GridLayout());
         panel1.add(new JLabel("主题"));
+
         //TODO 横向滚动预览画面
 
         panel1.add(new JLabel("音效"));
@@ -24,6 +43,8 @@ public class SettingPanel extends JFrame {
         JButton bgmSoundDown = new JButton();
         bgm.setOpaque(false);
         bgm.setBorder(null);
+        bgm.setIcon("C:\\Users\\HP\\IdeaProjects\\FinalProject\\src\\resource\\button\\开关1.png");
+        bgm.setPressedIcon();
         bgm.setForeground(Color.BLACK);
         bgm.setFont(new Font("微软雅黑", Font.BOLD, 15));
         bgm.addChangeListener(new ChangeListener() {

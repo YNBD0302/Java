@@ -9,8 +9,9 @@ public class ProgressPanel {
     private static final int maxValue = 100;
 
     private static int currentValue = minValue;
+    public ProgressPanel() {run();}
 
-    public static void main(String[] args) {
+    public void run() {
         JFrame progressPanel = new JFrame("扫雷");
         progressPanel.setSize(250, 250);
         progressPanel.setLocationRelativeTo(null);
@@ -55,8 +56,11 @@ public class ProgressPanel {
                     currentValue = minValue;
                 }
                 progress.setValue(currentValue);
-                if (currentValue==maxValue){}
+                if (currentValue == maxValue) {
+                    progressPanel.dispose();
+                    StartPanel startPanel=new StartPanel();
+                }
             }
         }).start();
-
-}}
+    }
+}

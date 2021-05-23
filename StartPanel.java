@@ -1,12 +1,17 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 
 public class StartPanel extends JFrame {
     private static final JFrame startFrame = new JFrame("扫雷");
-
+    private static final JPanel startPanel = new JPanel();
+    public StartPanel(){init();}
     public static void init() {
+        ImageIcon StartVideo = new ImageIcon();
         JLabel title = new JLabel("扫雷", JLabel.CENTER);
         title.setFont(new Font("微软雅黑", Font.BOLD, 50));
         title.setForeground(Color.BLACK);
@@ -14,7 +19,8 @@ public class StartPanel extends JFrame {
         JButton nonNetworkGame = new JButton("进入游戏");
         nonNetworkGame.setOpaque(false);
         nonNetworkGame.setBorder(null);
-        nonNetworkGame.setForeground(Color.BLACK);
+        nonNetworkGame.setIcon();
+        nonNetworkGame.setForeground(Color.WHITE);
         nonNetworkGame.setFont(new Font("微软雅黑", Font.BOLD, 26));
         nonNetworkGame.addActionListener(new ActionListener() {
             @Override
@@ -52,7 +58,6 @@ public class StartPanel extends JFrame {
         });
 
         startFrame.setSize(400, 600);
-        JPanel startPanel = new JPanel();
         startPanel.setSize(30, 40);
         startPanel.setLayout(new GridLayout(6, 1, 10, 40));
         startPanel.setPreferredSize(new Dimension(300, 500));
@@ -60,12 +65,12 @@ public class StartPanel extends JFrame {
         startPanel.add(nonNetworkGame);
         startPanel.add(onlineGame);
         startPanel.add(setting);
+
         startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = startFrame.getContentPane();
         c.add(startPanel);
         startFrame.setVisible(true);
     }
 
-    public static void main(String[] args) {init();
-    }
+
 }
